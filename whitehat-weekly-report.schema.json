@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sahjonycapital.com/schemas/whitehat-weekly-report.schema.json",
+  "title": "WhiteHat Weekly Operator Report",
+  "type": "object",
+  "required": [
+    "week",
+    "status",
+    "executive",
+    "revenueFunnel",
+    "delivery",
+    "compliance",
+    "quality",
+    "opsEfficiency",
+    "risks",
+    "decisions",
+    "nextWeekCommitments",
+    "confidence"
+  ],
+  "properties": {
+    "week": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["green", "yellow", "red"]
+    },
+    "executive": {
+      "type": "object",
+      "required": ["topOutcome", "topRisk", "nextHighestRoiAction"],
+      "properties": {
+        "topOutcome": { "type": "string" },
+        "topRisk": { "type": "string" },
+        "nextHighestRoiAction": { "type": "string" }
+      }
+    },
+    "revenueFunnel": {
+      "type": "object",
+      "required": [
+        "proposalsDrafted",
+        "proposalsSubmitted",
+        "interviewsBooked",
+        "contractsWon",
+        "winRatePct",
+        "revenueBookedUsd",
+        "avgContractValueUsd"
+      ],
+      "properties": {
+        "proposalsDrafted": { "type": "integer", "minimum": 0 },
+        "proposalsSubmitted": { "type": "integer", "minimum": 0 },
+        "interviewsBooked": { "type": "integer", "minimum": 0 },
+        "contractsWon": { "type": "integer", "minimum": 0 },
+        "winRatePct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "revenueBookedUsd": { "type": "number", "minimum": 0 },
+        "avgContractValueUsd": { "type": "number", "minimum": 0 }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "required": [
+        "activeEngagements",
+        "reportsDelivered",
+        "avgReportTurnaroundHours",
+        "onTimeDeliveryRatePct",
+        "csat"
+      ],
+      "properties": {
+        "activeEngagements": { "type": "integer", "minimum": 0 },
+        "reportsDelivered": { "type": "integer", "minimum": 0 },
+        "avgReportTurnaroundHours": { "type": "number", "minimum": 0 },
+        "onTimeDeliveryRatePct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "csat": { "type": "number", "minimum": 0, "maximum": 5 }
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "required": [
+        "scopeAuthorizationVerifiedPct",
+        "complianceIncidents",
+        "tosViolations",
+        "unauthorizedActionAttemptsBlocked",
+        "auditLogCompletenessPct"
+      ],
+      "properties": {
+        "scopeAuthorizationVerifiedPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "complianceIncidents": { "type": "integer", "minimum": 0 },
+        "tosViolations": { "type": "integer", "minimum": 0 },
+        "unauthorizedActionAttemptsBlocked": { "type": "integer", "minimum": 0 },
+        "auditLogCompletenessPct": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "findingsPerEngagementAvg",
+        "highCriticalFindingsCount",
+        "falsePositiveRatePct",
+        "remediationClarityScore"
+      ],
+      "properties": {
+        "findingsPerEngagementAvg": { "type": "number", "minimum": 0 },
+        "highCriticalFindingsCount": { "type": "integer", "minimum": 0 },
+        "falsePositiveRatePct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "remediationClarityScore": { "type": "number", "minimum": 0, "maximum": 10 }
+      }
+    },
+    "opsEfficiency": {
+      "type": "object",
+      "required": [
+        "utilizationRatePct",
+        "proposalToInterviewPct",
+        "interviewToWinPct",
+        "hoursPerWonDeal"
+      ],
+      "properties": {
+        "utilizationRatePct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "proposalToInterviewPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "interviewToWinPct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "hoursPerWonDeal": { "type": "number", "minimum": 0 }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["risk", "impact", "mitigation", "owner", "dueDate"],
+        "properties": {
+          "risk": { "type": "string" },
+          "impact": { "type": "string" },
+          "mitigation": { "type": "string" },
+          "owner": { "type": "string" },
+          "dueDate": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["decision", "why", "expectedImpact", "reviewDate"],
+        "properties": {
+          "decision": { "type": "string" },
+          "why": { "type": "string" },
+          "expectedImpact": { "type": "string" },
+          "reviewDate": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "nextWeekCommitments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "confidence": {
+      "object": {
+        "type": "object",
+        "required": ["level", "notes"],
+        "properties": {
+          "level": { "type": "string", "enum": ["high", "medium", "low"] },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
